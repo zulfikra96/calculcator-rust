@@ -1,0 +1,3 @@
+# calculcator-rust
+
+cargo run
