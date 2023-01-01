@@ -1,30 +1,19 @@
 use std::env::{args, Args};
 fn main() {
     let mut args:Args = args();
-    let first = args.nth(1).unwrap();
-    let operator = args.nth(0);
-    let second = args.nth(0).unwrap();
-    let result: f64 = match operator {
-        Some(res) => {
-            let first_number: f64 = first.parse::<f64>().unwrap();
-            let second_number: f64 = second.parse::<f64>().unwrap();
-            if res == "+" {
-                first_number + second_number
-            } 
-            else if res == "*" {
-                first_number * second_number
-            } 
-            else if res == "/" {
-                first_number / second_number
-            } 
-            else if res == "-" {
-                first_number - second_number
-            }
-            else {
-                panic!("Invalid operator")
-            }
-        },
-        None => panic!("")
-    };
+    let first_number = args.nth(1).unwrap().parse::<f32>().unwrap();
+    let operator = args.nth(0).unwrap().chars().next().unwrap();
+    let second_number = args.nth(0).unwrap().parse::<f32>().unwrap();
+    let result: f32 = operate(operator, first_number, second_number);
     println!("Result is {} ", result);
+}
+
+fn operate(operator: char, first_number: f32, second_number: f32) -> f32 {
+    match operator {
+        '+' => first_number + second_number,
+        '-' => first_number - second_number,
+        '/' | ':' => first_number / second_number,
+        '*' | 'x' | 'X' => first_number * second_number,
+        _ => panic!("Invalid operator used.")
+    }
 }
